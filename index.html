@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi espacio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="phone">
+    <div class="statusbar">
+      <span>9:41</span>
+      <span>••• 📶 🔋</span>
+    </div>
+
+    <div class="header">
+      <h1 class="header-title">Mi espacio</h1>
+      <div class="avatar">👤</div>
+    </div>
+
+    <main class="content">
+      <a href="nueva-entrada.html" class="btn-dark">+ Escribir algo nuevo</a>
+
+      <div class="section-label">ENTRADAS ANTERIORES</div>
+      <div class="entradas" id="lista-entradas"></div>
+    </main>
+
+    <div class="footer-bar">
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    const entradas = obtenerEntradas();
+    const lista = document.getElementById("lista-entradas");
+
+    if (entradas.length === 0) {
+      lista.innerHTML = '<p class="empty-state">Todavía no has escrito nada. Cuando quieras, este espacio está aquí.</p>';
+    } else {
+      const copia = [...entradas].reverse();
+      lista.innerHTML = copia.map((e) => `
+        <div class="entrada">
+          <div class="entrada-fecha">${formatearFecha(e.fecha)}</div>
+          <div class="entrada-texto">${e.texto}</div>
+        </div>
+      `).join("");
+    }
+  </script>
+</body>
+</html>

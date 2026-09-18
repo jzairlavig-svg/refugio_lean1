@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acompañamiento</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="phone">
+    <div class="statusbar">
+      <span>9:41</span>
+      <span>••• 📶 🔋</span>
+    </div>
+
+    <div class="header">
+      <button class="back-button" onclick="window.location.href='index.html'">&larr; Acompañamiento</button>
+    </div>
+
+    <main class="content">
+      <div class="acomp-card">
+        <div class="acomp-icon">💬</div>
+        <p class="acomp-texto">
+          Hemos notado que los últimos días no han sido tan buenos. ¿Te gustaría
+          hablar con alguien del colegio? Nadie más se enterará.
+        </p>
+        <div class="acomp-nota">
+          🔒 Esto queda solo entre tú y el psicólogo del colegio.
+        </div>
+      </div>
+
+      <div class="acomp-actions">
+        <button class="btn-secundario" onclick="window.location.href='index.html'">Ahora no, gracias</button>
+        <button class="btn-primario-inline" id="btn-hablar">Sí, quiero hablar</button>
+      </div>
+    </main>
+
+    <div class="footer-bar">
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    document.getElementById("btn-hablar").addEventListener("click", () => {
+      alert("Listo. Se le avisará al psicólogo del colegio para que te contacte pronto.");
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>
