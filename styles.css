@@ -1,319 +1,42 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: -apple-system, 'Segoe UI', Inter, sans-serif;
-  background: #F4F4F5;
-  display: flex;
-  justify-content: center;
-}
-
-.phone {
-  width: 100%;
-  max-width: 420px;
-  min-height: 100vh;
-  background: #FFFFFF;
-  display: flex;
-  flex-direction: column;
-}
-
-.statusbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 20px 0;
-  font-size: 13px;
+/* ═════════ DÍA 4: DESIGN SPRINT EXTRAS ═════════ */
+.community-banner {
+  background: var(--amber-tint);
+  color: #7A5A15;
+  padding: 12px 18px;
+  font-size: .88rem;
   font-weight: 600;
-  color: #111111;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px 8px;
-}
-
-.header-title {
-  font-size: 22px;
-  font-weight: 700;
-  color: #111111;
-  margin: 0;
-}
-
-.back-button {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: none;
-  border: none;
-  font-size: 15px;
-  font-weight: 600;
-  color: #111111;
-  cursor: pointer;
-  padding: 0;
+  border-bottom: 1px solid var(--line);
 }
 
-.avatar {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 1px solid #E4E4E7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #71717A;
-}
-
-.content {
-  flex: 1;
-  padding: 8px 20px 20px;
+.semaforo {
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
 }
 
-.btn-dark {
-  background: #1C1C1E;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 999px;
-  font-size: 15px;
-  font-weight: 600;
-  padding: 15px;
-  width: 100%;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  display: block;
-}
-
-.btn-dark:hover {
-  background: #000000;
-}
-
-.section-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: #A1A1AA;
-  letter-spacing: 0.02em;
-  margin: 24px 0 10px;
-}
-
-.entradas {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.entrada {
-  border-bottom: 1px solid #F0F0F1;
-  padding-bottom: 14px;
-}
-
-.entrada:last-child {
-  border-bottom: none;
-}
-
-.entrada-fecha {
-  font-size: 12px;
-  font-weight: 600;
-  color: #A1A1AA;
-  margin-bottom: 4px;
-}
-
-.entrada-texto {
-  font-size: 14px;
-  color: #3F3F46;
-  line-height: 1.4;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-}
-
-.empty-state {
-  color: #A1A1AA;
-  font-size: 14px;
-  text-align: center;
-  margin-top: 40px;
-}
-
-.footer-bar {
-  padding: 10px 0 16px;
-  display: flex;
-  justify-content: center;
-}
-
-.home-indicator {
-  width: 120px;
-  height: 4px;
-  border-radius: 2px;
-  background: #1C1C1E;
-}
-
-/* Nueva entrada */
-.textarea-entrada {
-  flex: 1;
-  border: 1px solid #E4E4E7;
+.sem-btn {
+  padding: 14px 16px;
   border-radius: 14px;
-  padding: 16px;
-  font-size: 15px;
-  font-family: inherit;
-  color: #111111;
-  resize: none;
-  outline: none;
-  margin-bottom: 16px;
-  min-height: 320px;
-}
-
-.textarea-entrada:focus {
-  border-color: #1C1C1E;
-}
-
-.textarea-entrada::placeholder {
-  color: #A1A1AA;
-}
-
-/* Estado de ánimo */
-.mood-screen {
-  align-items: center;
-  text-align: center;
-  padding-top: 40px;
-}
-
-.mood-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: #F4F4F5;
-  border-radius: 999px;
-  padding: 6px 14px;
-  font-size: 12px;
+  border: 1.5px solid var(--line);
+  background: var(--surface);
+  text-align: left;
+  font-size: .88rem;
   font-weight: 600;
-  color: #71717A;
-  margin-bottom: 28px;
+  color: var(--ink-2);
+  transition: 0.15s;
 }
 
-.mood-question {
-  font-size: 21px;
-  font-weight: 700;
-  color: #111111;
-  margin: 0 0 8px;
-  max-width: 280px;
+.sem-btn:hover {
+  background: var(--surface-2);
 }
 
-.mood-subtext {
-  font-size: 13px;
-  color: #A1A1AA;
-  margin: 0 0 36px;
-}
-
-.mood-options {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  margin-bottom: 8px;
-}
-
-.mood-option {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 1px solid #E4E4E7;
-  background: #FFFFFF;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.mood-option.selected {
-  background: #1C1C1E;
-  border-color: #1C1C1E;
-  color: #FFFFFF;
-}
-
-.mood-scale-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
-  color: #A1A1AA;
-  margin-bottom: 36px;
-}
-
-.mood-actions {
-  width: 100%;
-  margin-top: auto;
-}
-
-/* Acompañamiento */
-.acomp-card {
-  background: #F4F4F5;
-  border-radius: 16px;
-  padding: 20px;
-  margin-top: 12px;
-}
-
-.acomp-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #FFFFFF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 14px;
-  font-size: 16px;
-}
-
-.acomp-texto {
-  font-size: 14px;
-  color: #27272A;
-  line-height: 1.5;
-  margin: 0 0 16px;
-}
-
-.acomp-nota {
-  display: flex;
-  align-items: flex-start;
-  gap: 6px;
-  font-size: 12px;
-  color: #71717A;
-  border-top: 1px solid #E4E4E7;
-  padding-top: 12px;
-  line-height: 1.4;
-}
-
-.acomp-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: auto;
-}
-
-.btn-secundario {
-  flex: 1;
-  background: #FFFFFF;
-  color: #111111;
-  border: 1px solid #E4E4E7;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 14px;
-  cursor: pointer;
-}
-
-.btn-primario-inline {
-  flex: 1;
-  background: #1C1C1E;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 14px;
-  cursor: pointer;
+.sem-btn.is-on {
+  border-color: var(--brand);
+  background: var(--brand-tint);
+  color: var(--brand-deep);
+  transform: scale(1.02);
 }
