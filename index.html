@@ -1,51 +1,298 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mi espacio</title>
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Refugio — Prototipo v0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="phone">
-    <div class="statusbar">
+
+<p class="demo-note">Prototipo v0 · TB1 Lean Management · Contenido ficticio para demostración</p>
+
+<div class="stage">
+  <div class="device">
+    <div class="device__bar">
       <span>9:41</span>
-      <span>••• 📶 🔋</span>
+      <div class="device__dots"><i></i><i></i><i></i></div>
     </div>
 
-    <div class="header">
-      <h1 class="header-title">Mi espacio</h1>
-      <div class="avatar">👤</div>
-    </div>
+    <main class="app" id="app">
 
-    <main class="content">
-      <a href="nueva-entrada.html" class="btn-dark">+ Escribir algo nuevo</a>
+      <!-- ══════════ SPLASH ══════════ -->
+      <section class="screen screen--splash" data-screen="splash">
+        <div class="splash">
+          <div class="brand">
+            <div class="brand__mark">
+              <svg viewBox="0 0 56 56" fill="none" aria-hidden="true">
+                <path d="M28 8 8 22v24a2 2 0 0 0 2 2h36a2 2 0 0 0 2-2V22L28 8Z" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"/>
+                <path d="M21 48V33a7 7 0 0 1 14 0v15" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h1 class="brand__name">Refugio</h1>
+          </div>
+          <p class="splash__tag">Un lugar donde puedes ser tú sin que nadie del colegio sepa quién eres.</p>
 
-      <div class="section-label">ENTRADAS ANTERIORES</div>
-      <div class="entradas" id="lista-entradas"></div>
+          <div class="splash__points">
+            <div class="splash__point"><span>🕶️</span> Entras con un apodo, no con tu nombre</div>
+            <div class="splash__point"><span>💬</span> Comparte con otros o habla en privado</div>
+            <div class="splash__point"><span>🤝</span> Apoyo real del equipo del colegio</div>
+          </div>
+
+          <button class="btn btn--primary btn--lg" data-action="start">Empezar</button>
+        </div>
+      </section>
+
+      <!-- ══════════ REGISTRO ══════════ -->
+      <section class="screen" data-screen="register" hidden>
+        <header class="bar">
+          <button class="ico" data-action="go-splash" aria-label="Volver"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <h2 class="bar__title">Crea tu identidad</h2>
+        </header>
+
+        <form class="pad form" id="form-register">
+          <p class="lead">Nadie va a saber que eres tú. Elige un apodo y un avatar.</p>
+
+          <div class="avatar-picker" id="avatar-picker"></div>
+
+          <label class="field">
+            <span class="field__lbl">Tu apodo</span>
+            <input type="text" name="alias" maxlength="18" placeholder="Ej. Zorrito_04" required>
+          </label>
+
+          <label class="field">
+            <span class="field__lbl">Grado</span>
+            <select name="grado" required>
+              <option value="" disabled selected>Elige tu grado</option>
+              <option>1° secundaria</option>
+              <option>2° secundaria</option>
+              <option>3° secundaria</option>
+              <option>4° secundaria</option>
+              <option>5° secundaria</option>
+            </select>
+          </label>
+
+          <p class="note">
+            <svg viewBox="0 0 24 24" class="note__ico"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+            Tu apodo es lo único que ven los demás. El equipo de psicología solo accede a tus datos si tú inicias una conversación privada.
+          </p>
+          
+          <label class="field checkbox-label" style="flex-direction: row; align-items: center; margin: 10px 0; font-size: 0.85rem; color: var(--ink-2);">
+            <input type="checkbox" required style="width: auto; margin-right: 8px; accent-color: var(--brand);">
+            Entiendo que yo decido qué compartir y que este espacio es anónimo.
+          </label>
+
+          <button class="btn btn--primary btn--full" type="submit">Crear mi cuenta</button>
+        </form>
+      </section>
+
+      <!-- ══════════ CHECK-IN ══════════ -->
+      <section class="screen" data-screen="checkin" hidden>
+        <div class="checkin">
+          <div class="checkin__head">
+            <p class="checkin__eyebrow">Antes de entrar</p>
+            <h2 class="checkin__q">¿Cómo te sientes hoy?</h2>
+            <p class="checkin__sub">Nadie ve tu respuesta. Es solo para ti.</p>
+          </div>
+
+          <div class="moods" id="moods">
+            <button class="mood" data-value="1"><span class="mood__face">😞</span><span class="mood__txt">Fatal</span></button>
+            <button class="mood" data-value="2"><span class="mood__face">😕</span><span class="mood__txt">Mal</span></button>
+            <button class="mood" data-value="3"><span class="mood__face">😐</span><span class="mood__txt">Normal</span></button>
+            <button class="mood" data-value="4"><span class="mood__face">🙂</span><span class="mood__txt">Bien</span></button>
+            <button class="mood" data-value="5"><span class="mood__face">😄</span><span class="mood__txt">Genial</span></button>
+          </div>
+
+          <button class="link-btn" data-action="skip-checkin">Prefiero no responder</button>
+        </div>
+      </section>
+
+      <!-- ══════════ COMUNIDAD (FEED) ══════════ -->
+      <section class="screen" data-screen="feed" hidden>
+        <header class="bar bar--brand">
+          <div class="bar__brand">
+            <span class="bar__logo">
+              <svg viewBox="0 0 56 56" fill="none"><path d="M28 8 8 22v24a2 2 0 0 0 2 2h36a2 2 0 0 0 2-2V22L28 8Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M21 48V33a7 7 0 0 1 14 0v15" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="bar__name">Refugio</span>
+          </div>
+          <div class="bar__me" id="bar-me"></div>
+        </header>
+
+        <div class="channels" id="channels"></div>
+
+        <div class="community-banner">
+          <span>👥</span> Esta semana, 24 alumnos ya buscaron apoyo
+        </div>
+
+        <div class="feed" id="feed"></div>
+
+        <button class="fab" data-action="open-compose" aria-label="Crear publicación">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+      </section>
+
+      <!-- ══════════ DETALLE DE POST ══════════ -->
+      <section class="screen" data-screen="post" hidden>
+        <header class="bar">
+          <button class="ico" data-action="go-feed" aria-label="Volver"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <h2 class="bar__title">Publicación</h2>
+        </header>
+        <div class="post-detail" id="post-detail"></div>
+        <form class="composer" id="comment-form">
+          <input type="text" id="comment-input" placeholder="Escribe un comentario" autocomplete="off">
+          <button class="ico ico--send" type="submit" aria-label="Comentar"><svg viewBox="0 0 24 24"><path d="M4 12l16-8-6 16-3-6-7-2Z"/></svg></button>
+        </form>
+      </section>
+
+      <!-- ══════════ MI ESPACIO ══════════ -->
+      <section class="screen" data-screen="espacio" hidden>
+        <header class="bar bar--brand">
+          <h2 class="bar__title bar__title--lg">Mi espacio</h2>
+        </header>
+
+        <div class="pad espacio">
+
+          <div class="card card--soft">
+            <h3 class="card__title">Semáforo de apoyo</h3>
+            <p class="card__sub">Indica si necesitas hablar. Solo tú ves esto.</p>
+            <div class="semaforo">
+              <button class="sem-btn" data-color="verde">🟢 No necesito hablar con nadie</button>
+              <button class="sem-btn" data-color="amarillo">🟡 Quizá hable con alguien</button>
+              <button class="sem-btn" data-color="rojo">🔴 Quiero hablar con el psicólogo</button>
+            </div>
+            <button id="btn-pedir-cita" class="btn btn--primary btn--full" data-action="go-apoyo" hidden style="margin-top: 8px;">Pedir cita / Chat Privado</button>
+          </div>
+
+          <div class="card card--soft">
+            <h3 class="card__title">Lo que me gusta</h3>
+            <p class="card__sub">Toca lo que va contigo. Solo tú lo ves.</p>
+            <div class="tags" id="tags"></div>
+          </div>
+
+          <div class="card">
+            <h3 class="card__title">Diario privado</h3>
+            <p class="card__sub">Escribe lo que sea. Esto no se publica en ningún lado.</p>
+            <textarea id="journal-input" class="ta" rows="3" placeholder="Hoy me pasó que..."></textarea>
+            <button class="btn btn--primary btn--full" data-action="save-entry">Guardar entrada</button>
+          </div>
+
+          <div class="entries" id="entries"></div>
+        </div>
+      </section>
+
+      <!-- ══════════ APOYO ══════════ -->
+      <section class="screen" data-screen="apoyo" hidden>
+        <header class="bar bar--brand">
+          <h2 class="bar__title bar__title--lg">Apoyo</h2>
+        </header>
+
+        <div class="pad">
+          <div class="alert" id="alert-card" hidden>
+            <span class="alert__ico">💛</span>
+            <div>
+              <p class="alert__txt">Las últimas veces has marcado que no la estás pasando bien. Si quieres, puedes escribirle a alguien. Sin compromiso.</p>
+              <button class="btn btn--accent btn--small" data-action="open-first-chat">Escribir ahora</button>
+            </div>
+          </div>
+
+          <p class="lead">Estas personas trabajan en tu colegio. Escribirles es privado: nadie de tu salón se entera.</p>
+          <div class="psi-list" id="psi-list"></div>
+        </div>
+      </section>
+
+      <!-- ══════════ CHAT ══════════ -->
+      <section class="screen" data-screen="chat" hidden>
+        <header class="bar bar--chat">
+          <button class="ico" data-action="go-apoyo" aria-label="Volver"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <div class="chat-head" id="chat-head"></div>
+        </header>
+        <div class="chat" id="chat-messages"></div>
+        <form class="composer" id="chat-form">
+          <input type="text" id="chat-input" placeholder="Escribe un mensaje" autocomplete="off">
+          <button class="ico ico--send" type="submit" aria-label="Enviar"><svg viewBox="0 0 24 24"><path d="M4 12l16-8-6 16-3-6-7-2Z"/></svg></button>
+        </form>
+      </section>
+
+      <!-- ══════════ PERFIL ══════════ -->
+      <section class="screen" data-screen="perfil" hidden>
+        <header class="bar bar--brand">
+          <h2 class="bar__title bar__title--lg">Mi perfil</h2>
+        </header>
+        <div class="pad">
+          <div class="profile" id="profile"></div>
+
+          <div class="card">
+            <h3 class="card__title">Cómo me he sentido</h3>
+            <p class="card__sub">Tus últimos check-ins. Solo tú ves esto.</p>
+            <div class="chart" id="mood-chart"></div>
+          </div>
+
+          <button class="btn btn--ghost btn--full" data-action="reset">Reiniciar la demo</button>
+        </div>
+      </section>
+
     </main>
 
-    <div class="footer-bar">
-      <div class="home-indicator"></div>
-    </div>
-  </div>
+    <!-- ══════════ NAV ══════════ -->
+    <nav class="tabs" id="tabs" hidden>
+      <button class="tab" data-nav="feed" data-action="go-feed">
+        <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Comunidad</span>
+      </button>
+      <button class="tab" data-nav="espacio" data-action="go-espacio">
+        <svg viewBox="0 0 24 24"><path d="M6 4h9l3 3v13H6V4Z"/><path d="M9 11h6M9 15h4"/></svg><span>Mi espacio</span>
+      </button>
+      <button class="tab" data-nav="apoyo" data-action="go-apoyo">
+        <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.3-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.7-7 9-7 9Z"/></svg><span>Apoyo</span>
+      </button>
+      <button class="tab" data-nav="perfil" data-action="go-perfil">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg><span>Perfil</span>
+      </button>
+    </nav>
 
-  <script src="app.js"></script>
-  <script>
-    const entradas = obtenerEntradas();
-    const lista = document.getElementById("lista-entradas");
-
-    if (entradas.length === 0) {
-      lista.innerHTML = '<p class="empty-state">Todavía no has escrito nada. Cuando quieras, este espacio está aquí.</p>';
-    } else {
-      const copia = [...entradas].reverse();
-      lista.innerHTML = copia.map((e) => `
-        <div class="entrada">
-          <div class="entrada-fecha">${formatearFecha(e.fecha)}</div>
-          <div class="entrada-texto">${e.texto}</div>
+    <!-- ══════════ MODAL COMPOSE ══════════ -->
+    <div class="sheet" id="sheet-compose" hidden>
+      <div class="sheet__panel">
+        <div class="sheet__head">
+          <h3>Nueva publicación</h3>
+          <button class="ico" data-action="close-compose" aria-label="Cerrar"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
         </div>
-      `).join("");
-    }
-  </script>
+        <form id="form-post" class="sheet__body">
+          <div class="chips" id="post-channels"></div>
+          <input type="text" name="titulo" class="inp" placeholder="Título" maxlength="70" required>
+          <textarea name="texto" class="ta" rows="4" placeholder="Cuenta lo que quieras. Nadie sabe que eres tú." required></textarea>
+          <p class="note note--sm">Se publicará como <strong id="post-as">—</strong></p>
+          <button class="btn btn--primary btn--full" type="submit">Publicar</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ══════════ MODAL DE ENCUESTA AL COMENTAR ══════════ -->
+    <div class="sheet" id="sheet-survey" hidden>
+      <div class="sheet__panel">
+        <div class="sheet__head">
+          <h3>¿Cómo te sentiste?</h3>
+          <button class="ico" data-action="close-survey" aria-label="Cerrar"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+        </div>
+        <div class="sheet__body" style="text-align: center;">
+          <p class="lead">Al compartir o comentar aquí de forma anónima:</p>
+          <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <button class="btn btn--ghost btn--full" data-action="survey-ans">🙂 Bien</button>
+            <button class="btn btn--ghost btn--full" data-action="survey-ans">😕 Mal</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" hidden></div>
+
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
